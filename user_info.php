@@ -22,7 +22,7 @@
             <div>
                 <div class="nav__brand">
                     <ion-icon name="menu-outline" class="nav__toggle" id="nav-toggle"></ion-icon>
-                    <a href="#" class="nav__logo">RAINBOW</a>
+                    <a href="home_user.php" class="nav__logo">RAINBOW</a>
                 </div>
 
                 <div class="nav__list">
@@ -36,17 +36,17 @@
                         <span class="nav_name">이 주의 HOT Fashion!</span>
                     </a>
 
-                    <a href="#" class="nav__link">
+                    <a href="direct_search_user.php" class="nav__link">
                         <ion-icon name="search-outline" class="nav__icon"></ion-icon>
                         <span class="nav_name">검색</span>
                     </a>
 
-                    <a href="User_custom.php" class="nav__link active">
+                    <a href="User_custom.php" class="nav__link">
                         <ion-icon name="thumbs-up-outline" class="nav__icon"></ion-icon>
                         <span class="nav_name">맞춤 추천</span>
                     </a>
 
-                    <a href="user_info.php" class="nav__link">
+                    <a href="user_info.php" class="nav__link active">
                         <ion-icon name="person-outline" class="nav__icon"></ion-icon>
                         <span class="nav_name">내 정보</span>
                     </a>

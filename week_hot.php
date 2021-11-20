@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/search_result.css">
 
     <title>RAINBOW</title>
     </style>
@@ -17,11 +17,11 @@
             <div>
                 <div class="nav__brand">
                     <ion-icon name="menu-outline" class="nav__toggle" id="nav-toggle"></ion-icon>
-                    <a href="#" class="nav__logo">RAINBOW</a>
+                    <a href="home.php" class="nav__logo">RAINBOW</a>
                 </div>
 
                 <div class="nav__list">
-                    <a href="home.html" class="nav__link">
+                    <a href="home.php" class="nav__link">
                         <ion-icon name="home-outline" class="nav__icon"></ion-icon>
                         <span class="nav_name">HOME</span>
                     </a>
@@ -31,7 +31,7 @@
                         <span class="nav_name">이 주의 HOT Fashion!</span>
                     </a>
 
-                    <a href="#" class="nav__link">
+                    <a href="direct_search.php" class="nav__link">
                         <ion-icon name="search-outline" class="nav__icon"></ion-icon>
                         <span class="nav_name">검색</span>
                     </a>

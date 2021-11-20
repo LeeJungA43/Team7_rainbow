@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/search_result.css">
 
     <title>RAINBOW</title>
 </head>
@@ -22,7 +22,7 @@
             <div>
                 <div class="nav__brand">
                     <ion-icon name="menu-outline" class="nav__toggle" id="nav-toggle"></ion-icon>
-                    <a href="#" class="nav__logo">RAINBOW</a>
+                    <a href="home_user.php" class="nav__logo">RAINBOW</a>
                 </div>
 
                 <div class="nav__list">
@@ -41,7 +41,7 @@
                         <span class="nav_name">검색</span>
                     </a>
 
-                    <a href="#" class="nav__link">
+                    <a href="User_custom.php" class="nav__link">
                         <ion-icon name="thumbs-up-outline" class="nav__icon"></ion-icon>
                         <span class="nav_name">맞춤 추천</span>
                     </a>
@@ -167,28 +167,34 @@
             exit();
         } else {
             $sql = "SELECT * FROM Cloth_info";
-                $res = mysqli_query($mysqli, $sql);
-
-                echo '<table style="width:1000">'; 
-                while($row = mysqli_fetch_array($res))
-                {
-                    if($_SESSION['Best_large_category'] == $row['large_category']){
-                            $src = $row['image'];
-                            $url = $row['link'];
-                            echo "<tr><td>"; 
-                            echo "<a href='$url'><img src='$src' />";
-                            echo "</td><br><td>";
-                            echo $row["name"];
-                            echo "</td><br><td>";
-                            echo $row["price"]."원 ";
-                            echo "</td><br><td>";
-                            echo $row["purchase_num"]."명 구매";
-                            echo "</td></tr>";  
-                            echo "<br><br>";  
+            $res = mysqli_query($mysqli, $sql);
+            $row_num = 0;
+            while($row = mysqli_fetch_array($res))
+            {
+                if($_SESSION['Best_large_category'] == $row['large_category']){
+                    if($row_num % 4 ==0){
+                        echo "<div class=\"one_row\">";
                     }
-                echo "</table>";   
+                    echo "<div class=\"one_goods\">";
+
+                    echo "<h3>". $row['name'] . "</h3>";
+                    echo "<div>" . $row['large_category'] . "</div>";
+                    echo "<div>" . $row['small_category'] . "</div>";
+                    echo "<a href=\"" .$row['link'] . "\">";
+                    echo "<img src=\"" . $row['image'] . "\"/>";
+                    echo "</a>";
+                    echo "<div>" . $row['price'] . "원</div>";
+                    echo "<div>" . $row['purchase_num'] . "명이 구매했습니다.</div>";
+                    echo" </div>";
+
+                    if($row_num % 4 ==3){
+                        echo "</div>";
+                    }
+                    $row_num++;
                 }
             }
+        $row_num = 0;
+        }
         mysqli_close($mysqli);
     ?>
 

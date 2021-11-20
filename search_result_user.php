@@ -15,18 +15,17 @@
 
     <title>RAINBOW</title>
 </head>
-<!-- 반응형 사이드바 -->
 <body id="body-pd">
     <div class="l-navbar" id="navbar">
         <nav class="nav">
             <div>
                 <div class="nav__brand">
                     <ion-icon name="menu-outline" class="nav__toggle" id="nav-toggle"></ion-icon>
-                    <a href="home_user.php" class="nav__logo">RAINBOW</a>
+                    <a href="HOME_user.php" class="nav__logo">RAINBOW</a>
                 </div>
 
                 <div class="nav__list">
-                    <a href="home_user.php" class="nav__link">
+                    <a href="HOME_user.php" class="nav__link">
                         <ion-icon name="home-outline" class="nav__icon"></ion-icon>
                         <span class="nav_name">HOME</span>
                     </a>
@@ -36,12 +35,12 @@
                         <span class="nav_name">이 주의 HOT Fashion!</span>
                     </a>
 
-                    <a href="direct_search_user.php" class="nav__link">
+                    <a href="direct_search_user.php" class="nav__link active">
                         <ion-icon name="search-outline" class="nav__icon"></ion-icon>
                         <span class="nav_name">검색</span>
                     </a>
 
-                    <a href="User_custom.php" class="nav__link active">
+                    <a href="User_custom.php" class="nav__link">
                         <ion-icon name="thumbs-up-outline" class="nav__icon"></ion-icon>
                         <span class="nav_name">맞춤 추천</span>
                     </a>
@@ -59,69 +58,31 @@
             </div>
         </nav>
     </div>
-
-    <!-- 로그인 줄 -->
-    <div style="font-size:15px;float:right;">
-
-            <?php echo $_SESSION['user_id'];?>님
-        </div>
-    <p style="clear:both;">&nbsp;</p>
-
-    <div>
-        <center><h1><?php echo $_SESSION['user_id'];?>님을 위한 오늘의 추천♥</center>
-    </div>
-
-    <br><br>
-
-    <div>
-        <?php
-            $mysqli = mysqli_connect("127.0.0.1","team07","team07","team07");
-            if (mysqli_connect_errno()) {
-                printf("Connect failed: %s\n", mysqli_connect_error());
-                exit();
-            } else {
-                $userid = $_SESSION['user_id'];
-                $sql = "SELECT DISTINCT id, large_category, small_category, COUNT(small_category) OVER (PARTITION BY small_category) AS user_rank FROM (SELECT * FROM search_record HAVING id = '$userid') a ORDER BY user_rank";
-                $res = mysqli_query($mysqli, $sql);
-
-                $rank = 1;
-                $row = mysqli_fetch_array($res);
-
-                if(!$row){
-                    echo "<center>아직 " . $_SESSION['user_id'] . "님을 잘 알지 못해요.</center>";
-                    $_SESSION['check'] = 0;
-                }
-
-                while($row = mysqli_fetch_array($res))
-                {
-                    if($rank==1 && $row['id']==$_SESSION['user_id']){
-                        $_SESSION['User_best_L'] = $row['large_category'];
-                        $_SESSION['User_best_S'] = $row['small_category'];
-                        $_SESSION['check'] = 1;
-                    }
-                }
-                mysqli_close($mysqli);
-            }
-        ?>
-    </div>
-
-    <div>
-        <?php
-            $mysqli = mysqli_connect("127.0.0.1","team07","team07","team07");
-            if (mysqli_connect_errno()) {
-            printf("Connect failed: %s\n", mysqli_connect_error());
-            exit();
-        } else {
-            $sql = "SELECT * FROM Cloth_info";
-                $res = mysqli_query($mysqli, $sql);
-                if($_SESSION['check']==0){
-                    echo "<center>다음에 다시 만나요.</center>";
-                }
-                else{
-                    $row_num = 0;
-                    while($row = mysqli_fetch_array($res))
-                    {
-                        if($_SESSION['User_best_L'] == $row['large_category']){
+    <h1>검색 결과</h1>
+   <!-- <div class="one_row">-->
+            <?php
+                $mysqli = mysqli_connect("127.0.0.1","team07","team07","team07");
+                if (mysqli_connect_errno()) {
+                    printf("Connect failed: %s\n", mysqli_connect_error());
+                    exit();
+                } else {
+                    $sql = "SELECT * FROM cloth_info WHERE large_category =\"". $_POST['cloth_large'] ."\" AND small_category = \"". $_POST['cloth_small'] ."\" AND name LIKE \"%". $_POST['cloth_name']."%\"";
+                    $res = mysqli_query($mysqli, $sql);
+                    $num_rows = mysqli_num_rows($res);
+                    if($num_rows==0){
+                        echo "<p>찾으시는 상품이 없습니다.</p>";
+                    }else{
+                        $row_num = 0;
+                        echo "<div> 총" .$num_rows . "건의 상품이 있습니다.</div>";
+                        echo "
+                            <select name=\"order_standard\">
+                                <option value=\"구매순\">구매순</option>
+                                <option value=\"가격순\">가격순</option>
+                            </select>
+                        
+                        ";
+                        while($row = mysqli_fetch_array($res))
+                        {
                             if($row_num % 4 ==0){
                                 echo "<div class=\"one_row\">";
                             }
@@ -140,18 +101,22 @@
                             if($row_num % 4 ==3){
                                 echo "</div>";
                             }
+
                             $row_num++;
-                        } 
+                        }
+                        $row_num = 0;
                     }
                 }
-            }
-            mysqli_close($mysqli);
-        ?>
-    </div>
-
-    <!-- IONICONS -->
+                mysqli_close($mysqli);
+            ?>
+            <?php
+                    //search_record table에 user id, 검색어 넣기  
+                $sql = "INSERT INTO search_record(id, large_category, small_category) VALUES ('". $_COOKIE['id']. "', '". $_POST['cloth_large']. "', '". $_POST['cloth_small'] . "')";
+                $res = mysqli_query($mysqli, $sql);
+            ?>
+    <!--</div> IONICONS -->
     <script src="https://unpkg.com/ionicons@5.2.3/dist/ionicons.js"></script>
     <!-- JS -->
-    <script src="js/main.js"></script>
+    <script src="main.js"></script>
 </body>
 </html>
