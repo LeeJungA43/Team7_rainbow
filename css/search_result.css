@@ -1,0 +1,24 @@
+@import "./styles.css";
+
+.one_row {
+  display: flex;
+  align-items: center;
+}
+
+.one_goods {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 20%;
+  margin: 10px 13px;
+  padding: 0px 4px;
+  background-color: rgb(255, 193, 182);
+  text-align: center;
+  border-radius: 25px;
+  height: 500px;
+}
+
+.one_goods a > img {
+  width: 250px;
+  height: 300px;
+}

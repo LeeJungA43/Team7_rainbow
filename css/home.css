@@ -1,0 +1,72 @@
+@import "./styles.css";
+
+.login_form {
+  display: flex;
+  justify-content: end;
+  margin-right: 30px;
+  margin-bottom: 30px;
+}
+
+.site_introduce {
+  margin: 10px 10px;
+  padding-bottom: 50px;
+}
+
+.site_sort {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.hotping {
+  background-color: rgb(222, 116, 135);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  border-radius: 25px;
+}
+
+.hotping h1 {
+  color: white;
+  text-align: center;
+  padding: 10px 0px;
+}
+
+.hotping a {
+  display: flex;
+  justify-content: center;
+}
+
+.hotping img {
+  width: 95%;
+  height: 500px;
+}
+
+.attrangs {
+  margin: 0px 10px;
+  background-color: rgb(229, 221, 196);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  border-radius: 25px;
+}
+
+.attrangs h1 {
+  color: white;
+  text-align: center;
+  padding: 10px 0px;
+}
+
+.attrangs a {
+  display: flex;
+  justify-content: center;
+}
+
+.attrangs img {
+  width: 95%;
+  height: 500px;
+}

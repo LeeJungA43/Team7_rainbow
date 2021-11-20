@@ -1,0 +1,11 @@
+@import "./styles.css";
+
+.search {
+  padding: 40px 0px;
+  display: flex;
+  align-items: center;
+}
+
+.search select {
+  margin: 0px 5px;
+}
